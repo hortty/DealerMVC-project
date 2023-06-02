@@ -3514,11 +3514,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\DealerMVC\\DealerMVC.csproj",
+      "projectUniqueName": "C:\\Projetos_git\\DealerMVC-project\\DealerMVC.csproj",
       "projectName": "DealerMVC",
-      "projectPath": "C:\\Users\\user\\Desktop\\DealerMVC\\DealerMVC.csproj",
+      "projectPath": "C:\\Projetos_git\\DealerMVC-project\\DealerMVC.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\DealerMVC\\obj\\",
+      "outputPath": "C:\\Projetos_git\\DealerMVC-project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

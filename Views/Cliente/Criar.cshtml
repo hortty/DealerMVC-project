@@ -3,27 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Adicionar Cliente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Adicionar Cliente</h1>
-
-    <div class="container">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
         <form method="post">
-            <div class="m-2">
-                <label class="form-label">Nome: </label>
-                <input type="text" class="form-control" id="nmCliente" asp-for="NmCliente" />
-            </div>
-
-            <div class="m-2">
-                <label class="form-label">Cidade: </label>
-                <input type="text" class="form-control" id="cidade" asp-for="Cidade" />
-            </div>
-
-            <div class="m-2">
-                <button type="submit" class="btn btn-dark">Enviar</button>
+            <div class="border p-4">
+                <h3 class="mb-4">Cadastro de Clientes</h3>
+                <div class="form-group">
+                    <label for="NmCliente">Nome do Cliente</label>
+                    <input type="text" class="form-control" id="NmCliente" asp-for="NmCliente">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="Cidade">Cidade</label>
+                    <input type="text" class="form-control" id="Cidade" asp-for="Cidade">
+                </div>
+                <button type="submit" class="btn btn-primary btn-dark mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
             </div>
         </form>
     </div>
+
 </body>
 </html>

@@ -1,34 +1,32 @@
-﻿@model IEnumerable<TesteAPI.Models.Domain.Cliente>
+﻿@model List<TesteAPI.Models.Domain.Cliente>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Clientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Lista de Clientes</h1>
-
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Cidade</th>
-            <th>Ações</th>
-        </tr>
-        @foreach (var cliente in Model)
-        {
-            <tr>
-                <td>@cliente.IdCliente</td>
-                <td>@cliente.NmCliente</td>
-                <td>@cliente.Cidade</td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = cliente.IdCliente }) |
-                    @Html.ActionLink("Excluir", "Delete", new { id = cliente.IdCliente }, new { onclick = "return confirm('Tem certeza que deseja excluir este cliente?');" })
-                </td>
-            </tr>
-        }
-    </table>
-
-    <p>@Html.ActionLink("Adicionar Cliente", "Create")</p>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nome do Cliente</th>
+                    <th>Cidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cliente in Model)
+                {
+                    <tr>
+                        <td>@cliente.IdCliente</td>
+                        <td>@cliente.NmCliente</td>
+                        <td>@cliente.Cidade</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

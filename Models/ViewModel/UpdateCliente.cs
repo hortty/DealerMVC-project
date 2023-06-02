@@ -2,7 +2,7 @@
 
 namespace TesteAPI.Models.ViewModel
 {
-    public class ListarCliente
+    public class UpdateCliente
     {
         [Key]
         [Required]

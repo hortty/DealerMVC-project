@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xrVIwYgEmHXjIgRA7wZqfbRD1rbgIw0oaM7/8sIOoA+qM5dbPDAcI9m6ojQy2lpK2Lr0kQIBgfBQ/4tO4f4+KA==",
+  "dgSpecHash": "IN3X7kN6D3OkG4Q7CTouoZqyBhbPTSwZR2yNLIe3biK2v5DwuR3mR2wuc3jfVi4pRqcyfUO49bFtkUoC0fc57Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\DealerMVC\\DealerMVC.csproj",
+  "projectFilePath": "C:\\Projetos_git\\DealerMVC-project\\DealerMVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
