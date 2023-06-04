@@ -1,0 +1,27 @@
+﻿@model TesteAPI.Models.ViewModel.UpdateVenda
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <form method="post" action="/Venda/Editar">
+        <div class="border p-4">
+            <h3 class="mb-4 text-danger">Editar Venda</h3>
+            <div class="form-group">
+                <label class="text-danger" for="IdCliente">ID do Cliente</label>
+                <input type="number" class="form-control" id="IdCliente" asp-for="IdCliente">
+            </div>
+            <div class="form-group">
+                <label class="text-danger" for="IdProduto">ID do Produto</label>
+                <input type="number" class="form-control" id="IdProduto" asp-for="IdProduto">
+            </div>
+            <div class="form-group">
+                <label class="text-danger" for="QtdVenda">Quantidade de vendas</label>
+                <input type="number" class="form-control" id="QtdVenda" asp-for="QtdVenda">
+            </div>
+            <div class="form-group">
+                <label class="text-danger" for="VlrUnitarioVenda">Valor unitário das vendas</label>
+                <input type="number" step="any" class="form-control" id="VlrUnitarioVenda" asp-for="VlrUnitarioVenda">
+            </div>
+            <input type="hidden" asp-for="IdVenda" />
+            <button type="submit" class="btn btn-outline-danger mt-4 d-flex justify-content-center mx-auto">Editar</button>
+        </div>
+    </form>
+</div>

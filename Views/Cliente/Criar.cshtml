@@ -1,19 +1,23 @@
 ﻿@model TesteAPI.Models.ViewModel.CreateCliente
 
 
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <form method="post">
-        <div class="border p-4">
-            <h3 class="mb-4">Cadastro de Clientes</h3>
-            <div class="form-group">
-                <label for="NmCliente">Nome do Cliente</label>
-                <input type="text" class="form-control" id="NmCliente" asp-for="NmCliente">
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+    <img src="~/images/client.jpg" class="img-fluid" style="max-width: 21rem; border-radius: 30px; margin-top: -10rem; margin-bottom: 3rem;" />
+    <form method="post" >
+        <div class="card border-light p-4" style="border-radius: 30px;">
+            <h3 class="mb-4 card-header">Cadastro de Clientes</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="card-text" for="NmCliente">Nome do Cliente</label>
+                    <input type="text" class="form-control" id="NmCliente" asp-for="NmCliente">
+                </div>
+                <div class="form-group mt-3">
+                    <label class="card-text" for="Cidade">Cidade</label>
+                    <input type="text" class="form-control" id="Cidade" asp-for="Cidade">
+                </div>
+                <button type="submit" class="btn btn-outline-light mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
             </div>
-            <div class="form-group mt-3">
-                <label for="Cidade">Cidade</label>
-                <input type="text" class="form-control" id="Cidade" asp-for="Cidade">
-            </div>
-            <button type="submit" class="btn btn-primary btn-dark mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
         </div>
     </form>
 </div>
+

@@ -1,0 +1,23 @@
+﻿@model TesteAPI.Models.ViewModel.CreateProduto
+
+
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+    <img src="~/images/product.png" class="img-fluid" style="max-width: 21rem; border-radius: 30px; margin-top: -10rem; margin-bottom: 3rem;" />
+    <form method="post" >
+        <div class="card border-primary p-4" style="border-radius: 30px;">
+            <h3 class="mb-4 card-header">Cadastro de Produtos</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="card-text" for="DscProduto">Descrição do Produto</label>
+                    <input type="text" class="form-control" id="DscProduto" asp-for="DscProduto">
+                </div>
+                <div class="form-group mt-3">
+                    <label class="card-text" for="VlrUnitario">Valor unitário</label>
+                    <input type="number" step="any" class="form-control" id="VlrUnitario" asp-for="VlrUnitario">
+                </div>
+                <button type="submit" class="btn btn-outline-secondary mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+

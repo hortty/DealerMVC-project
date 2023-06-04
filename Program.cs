@@ -16,9 +16,13 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
 
 // minhas services do sistema
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+builder.Services.AddScoped<IVendaService, VendaService>();
 
 // meus repo utilizados como DpInjec
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IVendaRepository, VendaRepository>();
 
 var app = builder.Build();
 

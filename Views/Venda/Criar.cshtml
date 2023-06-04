@@ -1,0 +1,31 @@
+﻿@model TesteAPI.Models.ViewModel.CreateVenda
+
+
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+    <img src="~/images/venda.png" class="img-fluid" style="max-width: 15rem; border-radius: 10px; margin-top: -10rem; margin-bottom: 3rem;" />
+    <form method="post" >
+        <div class="card border-danger p-4" style="border-radius: 30px;">
+            <h3 class="mb-4 card-header">Cadastro de Vendas</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="card-text" for="IdCliente">ID do Cliente</label>
+                    <input type="number" class="form-control" id="IdCliente" asp-for="IdCliente">
+                </div>
+                <div class="form-group">
+                    <label class="card-text" for="IdProduto">ID do Produto</label>
+                    <input type="number" class="form-control" id="IdProduto" asp-for="IdProduto">
+                </div>
+                <div class="form-group">
+                    <label class="card-text" for="QtdVenda">Quantidade de vendas</label>
+                    <input type="number" class="form-control" id="QtdVenda" asp-for="QtdVenda">
+                </div>
+                <div class="form-group">
+                    <label class="card-text" for="VlrUnitarioVenda">Valor unitário das vendas</label>
+                    <input type="number" step="any" class="form-control" id="VlrUnitarioVenda" asp-for="VlrUnitarioVenda">
+                </div>
+                <button type="submit" class="btn btn-outline-danger mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+

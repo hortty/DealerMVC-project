@@ -1,4 +1,5 @@
-﻿using DealerMVC.Services.Interfaces;
+﻿using DealerMVC.Repositories.Interfaces;
+using DealerMVC.Services.Interfaces;
 using TesteAPI.Models.Domain;
 using TesteAPI.Models.ViewModel;
 
@@ -6,19 +7,45 @@ namespace DealerMVC.Services
 {
     public class ProdutoService : IProdutoService
     {
-        public Produto Create(CreateProduto createProduto)
+        private readonly IProdutoRepository _produtoRepository;
+
+        public ProdutoService(IProdutoRepository produtoRepository)
         {
-            throw new NotImplementedException();
+            _produtoRepository = produtoRepository;
         }
 
-        public Produto Delete(DeleteProduto deleteProduto)
+        public Produto Create(CreateProduto createProduto)
         {
-            throw new NotImplementedException();
+            var produto = new Produto
+            {
+                DscProduto = createProduto.DscProduto,
+                VlrUnitario = createProduto.VlrUnitario
+            };
+
+            return _produtoRepository.Create(produto);
+        }
+
+        public Produto Delete(int id)
+        {
+            if(id<=0)
+            {
+                throw new Exception("O ID deve ser maior que zero!");
+            }
+            return _produtoRepository.Delete(id);
         }
 
         public IList<Produto> List()
         {
-            throw new NotImplementedException();
+            var produtos = _produtoRepository.List();
+
+            return produtos;
+        }
+
+        public Produto ListById(int id)
+        {
+            var produto = new Produto { IdProduto = id };
+
+            return _produtoRepository.ListById(produto);
         }
 
         public IList<Produto> ListByDesc(ListByDescProduto listProduto)
@@ -28,7 +55,14 @@ namespace DealerMVC.Services
 
         public Produto Update(UpdateProduto updateProduto)
         {
-            throw new NotImplementedException();
+            var produto = new Produto
+            {
+                IdProduto = updateProduto.IdProduto,
+                DscProduto = updateProduto.DscProduto,
+                VlrUnitario = updateProduto.VlrUnitario
+            };
+
+            return _produtoRepository.Update(produto);
         }
     }
 }

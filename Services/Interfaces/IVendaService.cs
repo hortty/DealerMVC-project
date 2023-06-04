@@ -5,16 +5,14 @@ namespace DealerMVC.Services.Interfaces
 {
     public interface IVendaService
     {
-        //public Venda Create(CreateVenda createVenda);
+        public Venda Create(CreateVenda createVenda);
 
-        //public Venda Delete(DeleteVenda deleteVenda);
+        public Venda Delete(int id);
 
-        //public IList<Venda> List();
+        public IList<Venda> List();
 
-        //public Venda Update(UpdateVenda updateVenda);
+        public Venda Update(UpdateVenda updateVenda);
 
-        //public IList<Venda> ListByClienteName(ListByClienteName listClienteNm);
-
-        //public IList<Venda> ListByProdutoDesc(ListByProdutoDesc listProdutoDesc);
+        public Venda ListById(int id);
     }
 }

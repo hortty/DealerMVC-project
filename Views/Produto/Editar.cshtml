@@ -1,0 +1,19 @@
+﻿@model TesteAPI.Models.ViewModel.UpdateProduto
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <form method="post" action="/Produto/Editar">
+        <div class="border p-4">
+            <h3 class="mb-4 text-secondary">Editar Produto</h3>
+            <div class="form-group">
+                <label class="text-secondary" for="DscProduto">Descrição do produto</label>
+                <input type="text" class="form-control" id="DscProduto" asp-for="DscProduto">
+            </div>
+            <div class="form-group mt-3">
+                <label class="text-secondary" for="VlrUnitario">Valor unitário</label>
+                <input type="number" step="any" class="form-control" id="VlrUnitario" asp-for="VlrUnitario">
+            </div>
+            <input type="hidden" asp-for="IdProduto" />
+            <button type="submit" class="btn btn-secondary mt-4 d-flex justify-content-center mx-auto">Editar</button>
+        </div>
+    </form>
+</div>

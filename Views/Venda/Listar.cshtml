@@ -1,26 +1,38 @@
-﻿@model List<TesteAPI.Models.Domain.Cliente>
+﻿@model List<TesteAPI.Models.Domain.Venda>
 
 
 <div class="container" style="margin-top: 15rem;">
     <table class="table table-bordered table-dark">
         <thead>
-            <tr class="table-light">
-                <th>ID</th>
+            <tr class="table-danger">
+                <th>ID Venda</th>
+                <th>ID Cliente</th>
                 <th>Nome do Cliente</th>
-                <th>Cidade</th>
+                <th>ID Produto</th>
+                <th>Descrição do Produto</th>
+                <th>Quantidade da venda</th>
+                <th>Valor unitário das vendas</th>
+                <th>Valor total</th>
+                <th>Horário venda</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var cliente in Model)
+            @foreach (var venda in Model)
             {
                 <tr>
-                    <td>@cliente.IdCliente</td>
-                    <td>@cliente.NmCliente</td>
-                    <td>@cliente.Cidade</td>
-                    <td>
-                        <a href="Editar/@cliente.IdCliente"><i class="fa fa-lg fa-edit"></i></a>
-                        <a href="#" class="excluir-link m-3" data-id="@cliente.IdCliente"><i class="fa fa-lg fa-trash"></i></a>
+                    <td>@venda.IdVenda</td>
+                    <td>@venda.IdCliente</td>
+                    <td>@venda.Cliente.NmCliente</td>
+                    <td>@venda.IdProduto</td>
+                    <td>@venda.Produto.DscProduto</td>
+                    <td>@venda.QtdVenda</td>
+                    <td>@venda.VlrUnitarioVenda</td>
+                    <td>@venda.VlrTotalVenda</td>
+                    <td>@venda.DthVenda</td>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <a href="Editar/@venda.IdVenda"><i class="text-danger fa fa-lg fa-edit"></i></a>
+                        <a href="#" class="excluir-link m-3" data-id="@venda.IdVenda"><i class="text-danger fa fa-lg fa-trash"></i></a>
                     </td>
                 </tr>
             }
@@ -29,7 +41,7 @@
 </div>
 
 <div class="d-flex justify-content-end align-items-center m-4">
-    <a class="nav-link text-light d-flex justify-content-center align-items-center m-4" asp-area="" asp-controller="Cliente" asp-action="Criar">
+    <a class="nav-link text-danger d-flex justify-content-center align-items-center m-4" asp-area="" asp-controller="Venda" asp-action="Criar">
         <i class="fa fa-plus m-2"></i> Add
      </a>
 </div>
@@ -69,7 +81,7 @@
         $('#confirmarExclusaoBtn').click(function () {
 
             console.log("excluir");
-            window.location.href = '/Cliente/Excluir/' + idExclusao;
+            window.location.href = '/Venda/Excluir/' + idExclusao;
         });
 
         $('.cancelar-modal').click(function () {
