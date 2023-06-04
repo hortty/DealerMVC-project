@@ -1,3 +1,7 @@
+using DealerMVC.Repositories;
+using DealerMVC.Repositories.Interfaces;
+using DealerMVC.Services;
+using DealerMVC.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using TesteAPI.Context;
 
@@ -9,6 +13,12 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
+
+// minhas services do sistema
+builder.Services.AddScoped<IClienteService, ClienteService>();
+
+// meus repo utilizados como DpInjec
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 var app = builder.Build();
 

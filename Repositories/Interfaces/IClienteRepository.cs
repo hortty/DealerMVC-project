@@ -6,12 +6,14 @@ namespace DealerMVC.Repositories.Interfaces
     {
         public Cliente Create(Cliente cliente);
 
-        public Cliente Delete(Cliente cliente);
+        public Cliente Delete(int id);
 
         public IList<Cliente> List();
 
         public Cliente Update(Cliente cliente);
 
         public IList<Cliente> ListByName(Cliente cliente);
+
+        public Cliente ListById(Cliente cliente);
     }
 }

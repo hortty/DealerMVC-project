@@ -1,10 +1,9 @@
-﻿@model TesteAPI.Models.ViewModel.CreateCliente
-
+﻿@model TesteAPI.Models.ViewModel.UpdateCliente
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <form method="post">
+    <form method="post" action="/Cliente/Editar">
         <div class="border p-4">
-            <h3 class="mb-4">Cadastro de Clientes</h3>
+            <h3 class="mb-4">Editar Cliente</h3>
             <div class="form-group">
                 <label for="NmCliente">Nome do Cliente</label>
                 <input type="text" class="form-control" id="NmCliente" asp-for="NmCliente">
@@ -13,7 +12,8 @@
                 <label for="Cidade">Cidade</label>
                 <input type="text" class="form-control" id="Cidade" asp-for="Cidade">
             </div>
-            <button type="submit" class="btn btn-primary btn-dark mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
+            <input type="hidden" asp-for="IdCliente" />
+            <button type="submit" class="btn btn-primary btn-dark mt-4 d-flex justify-content-center mx-auto">Editar</button>
         </div>
     </form>
 </div>

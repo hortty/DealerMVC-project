@@ -7,12 +7,14 @@ namespace DealerMVC.Services.Interfaces
     {
         public Cliente Create(CreateCliente createCliente);
 
-        public Cliente Delete(DeleteCliente deleteCliente);
+        public Cliente Delete(int id);
 
         public IList<Cliente> List();
 
         public Cliente Update(UpdateCliente updateCliente);
 
-        public IList<Cliente> ListByName(ListByNameCliente listCliente); 
+        public IList<Cliente> ListByName(ListByNameCliente listCliente);
+
+        public Cliente ListById(int id);
     }
 }
