@@ -61,7 +61,11 @@ namespace DealerMVC.Repositories
 
         public IList<Produto> ListByDesc(Produto produto)
         {
-            throw new NotImplementedException();
+            var produtos = _dbContext.Produtos
+                .Where(p => p.DscProduto.Contains(produto.DscProduto))
+                .ToList();
+
+            return produtos;
         }
 
         public Produto Update(Produto produto)

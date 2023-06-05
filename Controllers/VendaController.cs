@@ -4,6 +4,7 @@ using TesteAPI.Models.ViewModel;
 using TesteAPI.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using DealerMVC.Services.Interfaces;
+using Newtonsoft.Json;
 
 namespace TesteAPI.Controllers
 {
@@ -25,6 +26,9 @@ namespace TesteAPI.Controllers
         public IActionResult Listar()
         {
             IList<Venda> vendas = new List<Venda>();
+            ListVenda listVenda = new ListVenda();
+            listVenda.Vendas = new List<Venda>();
+
             try
             {
                 vendas = _vendaService.List();
@@ -35,7 +39,12 @@ namespace TesteAPI.Controllers
                 //throw new Exception(e.Message);
             }
 
-            return View(vendas);
+            foreach(var venda in vendas)
+            {
+                listVenda.Vendas.Add(venda);
+            }
+
+            return View(listVenda);
         }
 
         [HttpPost]
@@ -52,7 +61,7 @@ namespace TesteAPI.Controllers
             }
 
 
-            return RedirectToAction("Listar", "Venda");
+            return View();
         }
 
         [HttpGet]
@@ -75,8 +84,7 @@ namespace TesteAPI.Controllers
                 IdVenda = venda.IdVenda,
                 IdCliente = venda.IdCliente,
                 IdProduto = venda.IdProduto,
-                QtdVenda = venda.QtdVenda,
-                VlrUnitarioVenda = venda.VlrUnitarioVenda,
+                QtdVenda = venda.QtdVenda
             };
 
             return View(updateVenda);
@@ -99,7 +107,7 @@ namespace TesteAPI.Controllers
                 }
             }
 
-            return RedirectToAction("Listar", "Venda");
+            return View();
         }
 
         public IActionResult Excluir(int id)
@@ -116,6 +124,60 @@ namespace TesteAPI.Controllers
             }
 
             return RedirectToAction("Listar", "Venda");
+        }
+
+        [HttpPost]
+        public ActionResult PesquisarCliente(ListVenda listVendaPesquisar)
+        {
+            ListVenda listaVenda = new ListVenda();
+            listaVenda.Vendas = new List<Venda>();
+            try
+            {
+                var pesquisarCliente = new Cliente
+                {
+                    nmCliente = listVendaPesquisar.NmCliente
+                };
+
+                var vendasEncontradas = _vendaService.ListByNameCliente(pesquisarCliente);
+
+                foreach (var venda in vendasEncontradas)
+                {
+                    listaVenda.Vendas.Add(venda);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return View(listaVenda);
+        }
+
+        [HttpPost]
+        public ActionResult PesquisarProduto(ListVenda listVendaPesquisar)
+        {
+            ListVenda listaVenda = new ListVenda();
+            listaVenda.Vendas = new List<Venda>();
+            try
+            {
+                var pesquisarProduto = new Produto
+                {
+                    DscProduto = listVendaPesquisar.DscProduto
+                };
+
+                var vendasEncontradas = _vendaService.ListByDscProduto(pesquisarProduto);
+
+                foreach (var venda in vendasEncontradas)
+                {
+                    listaVenda.Vendas.Add(venda);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return View(listaVenda);
         }
 
     }

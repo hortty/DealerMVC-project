@@ -14,5 +14,9 @@ namespace DealerMVC.Services.Interfaces
         public Venda Update(UpdateVenda updateVenda);
 
         public Venda ListById(int id);
+
+        public List<Venda> ListByNameCliente(Cliente cliente);
+
+        public IList<Venda> ListByDscProduto(Produto produto);
     }
 }

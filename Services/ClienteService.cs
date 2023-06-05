@@ -18,7 +18,7 @@ namespace DealerMVC.Services
         {
             var cliente = new Cliente
             {
-                NmCliente = createCliente.NmCliente,
+                nmCliente = createCliente.nmCliente,
                 Cidade = createCliente.Cidade
             };
 
@@ -43,22 +43,24 @@ namespace DealerMVC.Services
 
         public Cliente ListById(int id)
         {
-            var cliente = new Cliente { IdCliente = id };
+            var cliente = new Cliente { idCliente = id };
 
             return _clienteRepository.ListById(cliente);
         }
 
-        public IList<Cliente> ListByName(ListByNameCliente listCliente)
+        public List<Cliente> ListByName(Cliente cliente)
         {
-            throw new NotImplementedException();
+            var clientes = _clienteRepository.ListByName(cliente);
+
+            return clientes;
         }
 
         public Cliente Update(UpdateCliente updateCliente)
         {
             var cliente = new Cliente
             {
-                IdCliente = updateCliente.IdCliente,
-                NmCliente = updateCliente.NmCliente,
+                idCliente = updateCliente.idCliente,
+                nmCliente = updateCliente.nmCliente,
                 Cidade = updateCliente.Cidade
             };
 

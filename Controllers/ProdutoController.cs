@@ -4,6 +4,7 @@ using TesteAPI.Models.ViewModel;
 using TesteAPI.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using DealerMVC.Services.Interfaces;
+using DealerMVC.Services;
 
 namespace TesteAPI.Controllers
 {
@@ -25,6 +26,9 @@ namespace TesteAPI.Controllers
         public IActionResult Listar()
         {
             IList<Produto> produtos = new List<Produto>();
+            ListProduto listaProduto = new ListProduto();
+            listaProduto.Produtos = new List<Produto>();
+
             try
             {
                 produtos = _produtoService.List();
@@ -35,7 +39,13 @@ namespace TesteAPI.Controllers
                 //throw new Exception(e.Message);
             }
 
-            return View(produtos);
+            foreach (var produto in produtos)
+            {
+                listaProduto.Produtos.Add(produto);
+            }
+
+
+            return View(listaProduto);
         }
 
         [HttpPost]
@@ -52,7 +62,7 @@ namespace TesteAPI.Controllers
             }
 
 
-            return RedirectToAction("Listar", "Produto");
+            return View();
         }
 
         [HttpGet]
@@ -97,7 +107,7 @@ namespace TesteAPI.Controllers
                 }
             }
 
-            return RedirectToAction("Listar", "Produto");
+            return View();
         }
 
         public IActionResult Excluir(int id)
@@ -114,6 +124,33 @@ namespace TesteAPI.Controllers
             }
 
             return RedirectToAction("Listar", "Produto");
+        }
+
+        [HttpPost]
+        public ActionResult PesquisarProduto(ListProduto listProdutoPesquisar)
+        {
+            ListProduto listaProduto = new ListProduto();
+            listaProduto.Produtos = new List<Produto>();
+            try
+            {
+                var pesquisarProduto = new Produto
+                {
+                    DscProduto = listProdutoPesquisar.DscProduto
+                };
+
+                var produtosEncontrados = _produtoService.ListByDesc(pesquisarProduto);
+
+                foreach (var produto in produtosEncontrados)
+                {
+                    listaProduto.Produtos.Add(produto);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return View(listaProduto);
         }
 
     }

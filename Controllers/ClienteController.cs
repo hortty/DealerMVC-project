@@ -4,6 +4,7 @@ using TesteAPI.Models.ViewModel;
 using TesteAPI.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using DealerMVC.Services.Interfaces;
+using DealerMVC.Services;
 
 namespace TesteAPI.Controllers
 {
@@ -25,6 +26,9 @@ namespace TesteAPI.Controllers
         public IActionResult Listar()
         {
             IList<Cliente> clientes = new List<Cliente>();
+            ListCliente listaCliente = new ListCliente();
+            listaCliente.Clientes = new List<Cliente>();
+
             try
             {
                 clientes = _clienteService.List();
@@ -35,7 +39,12 @@ namespace TesteAPI.Controllers
                 //throw new Exception(e.Message);
             }
 
-            return View(clientes);
+            foreach(var cliente in clientes)
+            {
+                listaCliente.Clientes.Add(cliente);
+            }
+
+            return View(listaCliente);
         }
 
         [HttpPost]
@@ -52,7 +61,7 @@ namespace TesteAPI.Controllers
             }
 
 
-            return RedirectToAction("Listar", "Cliente");
+            return View();
         }
 
         [HttpGet]
@@ -72,8 +81,8 @@ namespace TesteAPI.Controllers
 
             var updateCliente = new UpdateCliente
             {
-                IdCliente = cliente.IdCliente,
-                NmCliente = cliente.NmCliente,
+                idCliente = cliente.idCliente,
+                nmCliente = cliente.nmCliente,
                 Cidade = cliente.Cidade
             };
 
@@ -97,7 +106,7 @@ namespace TesteAPI.Controllers
                 }
             }
 
-            return RedirectToAction("Listar", "Cliente");
+            return View();
         }
 
         public IActionResult Excluir(int id)
@@ -114,6 +123,34 @@ namespace TesteAPI.Controllers
             }
 
             return RedirectToAction("Listar", "Cliente");
+        }
+
+        [HttpPost]
+        public ActionResult PesquisarCliente(ListCliente clientes)
+        {
+            ListCliente listaCliente = new ListCliente();
+            listaCliente.Clientes = new List<Cliente>();
+
+            try
+            {
+                var pesquisarCliente = new Cliente
+                {
+                    nmCliente = clientes.NmCliente
+                };
+
+                var foundClientes = _clienteService.ListByName(pesquisarCliente);
+
+                foreach (var cliente in foundClientes)
+                {
+                    listaCliente.Clientes.Add(cliente);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return View(listaCliente);
         }
 
     }

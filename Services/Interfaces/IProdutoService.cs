@@ -13,7 +13,7 @@ namespace DealerMVC.Services.Interfaces
 
         public Produto Update(UpdateProduto updateProduto);
 
-        public IList<Produto> ListByDesc(ListByDescProduto listProduto); 
+        public IList<Produto> ListByDesc(Produto produto); 
 
         public Produto ListById(int id);
     }

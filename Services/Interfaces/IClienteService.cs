@@ -13,7 +13,7 @@ namespace DealerMVC.Services.Interfaces
 
         public Cliente Update(UpdateCliente updateCliente);
 
-        public IList<Cliente> ListByName(ListByNameCliente listCliente);
+        public List<Cliente> ListByName(Cliente cliente);
 
         public Cliente ListById(int id);
     }

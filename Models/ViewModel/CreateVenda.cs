@@ -18,8 +18,5 @@ namespace TesteAPI.Models.ViewModel
         [Required]
         public int QtdVenda { get; set; }
 
-        [Required]
-        public float VlrUnitarioVenda { get; set; }
-
     }
 }

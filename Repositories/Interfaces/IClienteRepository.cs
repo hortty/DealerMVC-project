@@ -12,7 +12,7 @@ namespace DealerMVC.Repositories.Interfaces
 
         public Cliente Update(Cliente cliente);
 
-        public IList<Cliente> ListByName(Cliente cliente);
+        public List<Cliente> ListByName(Cliente cliente);
 
         public Cliente ListById(Cliente cliente);
     }

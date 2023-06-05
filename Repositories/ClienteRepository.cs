@@ -27,7 +27,7 @@ namespace DealerMVC.Repositories
 
         public Cliente Delete(int id)
         {
-            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.IdCliente == id);
+            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.idCliente == id);
 
             if (clienteExistente == null)
             {
@@ -50,7 +50,7 @@ namespace DealerMVC.Repositories
 
         public Cliente ListById(Cliente cliente)
         {
-            var foundCliente = _dbContext.Clientes.FirstOrDefault(cl => cl.IdCliente == cliente.IdCliente);
+            var foundCliente = _dbContext.Clientes.FirstOrDefault(cl => cl.idCliente == cliente.idCliente);
 
             if(foundCliente == null)
             {
@@ -60,15 +60,19 @@ namespace DealerMVC.Repositories
             return foundCliente;
         }
 
-        public IList<Cliente> ListByName(Cliente cliente)
+        public List<Cliente> ListByName(Cliente cliente)
         {
-            throw new NotImplementedException();
+            var clientes = _dbContext.Clientes
+            .Where(c => c.nmCliente.Contains(cliente.nmCliente))
+            .ToList();
+
+            return clientes;
         }
 
         public Cliente Update(Cliente cliente)
         {
 
-            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.IdCliente == cliente.IdCliente);
+            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.idCliente == cliente.idCliente);
 
             if (clienteExistente == null)
             {
@@ -79,9 +83,8 @@ namespace DealerMVC.Repositories
                 _dbContext.Clientes.Entry(clienteExistente).State = EntityState.Detached;
             }
 
-            // Atualiza os dados do cliente existente com os novos dados
             clienteExistente.Cidade = cliente.Cidade;
-            clienteExistente.NmCliente = cliente.NmCliente;
+            clienteExistente.nmCliente = cliente.nmCliente;
 
             _dbContext.Clientes.Entry(clienteExistente).State = EntityState.Modified;
             _dbContext.SaveChanges();

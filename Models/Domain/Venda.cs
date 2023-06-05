@@ -7,7 +7,7 @@ namespace TesteAPI.Models.Domain
     {
         [Key]
         [Required]
-        public int IdVenda { get; set; }
+        public int? IdVenda { get; set; }
 
         [ForeignKey("Cliente")]
         [Required]

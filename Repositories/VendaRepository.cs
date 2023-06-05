@@ -62,9 +62,26 @@ namespace DealerMVC.Repositories
             return foundVenda;
         }
 
-        public IList<Venda> ListByName(Venda venda)
+        public List<Venda> ListByNameCliente(Cliente cliente)
         {
-            throw new NotImplementedException();
+            var vendasComNomeCliente = _dbContext.Vendas
+            .Include(p => p.Produto)
+            .Include(c => c.Cliente)
+            .Where(c => c.Cliente.nmCliente.Contains(cliente.nmCliente))
+            .ToList();
+
+            return vendasComNomeCliente;
+        }
+
+        public IList<Venda> ListByDscProduto(Produto produto)
+        {
+            var vendasComDscProduto = _dbContext.Vendas
+            .Include(c => c.Cliente)
+            .Include(p => p.Produto)
+            .Where(p => p.Produto.DscProduto.Contains(produto.DscProduto))
+            .ToList();
+
+            return vendasComDscProduto;
         }
 
         public Venda Update(Venda venda)
@@ -81,7 +98,6 @@ namespace DealerMVC.Repositories
                 _dbContext.Vendas.Entry(vendaExistente).State = EntityState.Detached;
             }
 
-            // Atualiza os dados do venda existente com os novos dados
             vendaExistente.IdCliente = venda.IdCliente;
             vendaExistente.IdProduto = venda.IdProduto;
             vendaExistente.QtdVenda = venda.QtdVenda;

@@ -162,3 +162,4 @@ C:\Projetos_git\DealerMVC-project\obj\Debug\net6.0\refint\DealerMVC.dll
 C:\Projetos_git\DealerMVC-project\obj\Debug\net6.0\DealerMVC.pdb
 C:\Projetos_git\DealerMVC-project\obj\Debug\net6.0\DealerMVC.genruntimeconfig.cache
 C:\Projetos_git\DealerMVC-project\obj\Debug\net6.0\ref\DealerMVC.dll
+C:\Projetos_git\DealerMVC-project\bin\Debug\net6.0\Newtonsoft.Json.dll

@@ -8,7 +8,7 @@ namespace TesteAPI.Models.ViewModel
     {
         [Key]
         [Required]
-        public int IdVenda { get; set; }
+        public int? IdVenda { get; set; }
 
         [Required]
         public int IdCliente { get; set; }
@@ -18,9 +18,6 @@ namespace TesteAPI.Models.ViewModel
 
         [Required]
         public int QtdVenda { get; set; }
-
-        [Required]
-        public float VlrUnitarioVenda { get; set; }
 
     }
 }

@@ -8,20 +8,25 @@ namespace DealerMVC.Services
     public class VendaService : IVendaService
     {
         private readonly IVendaRepository _vendaRepository;
+        private readonly IProdutoService _produtoService;
 
-        public VendaService(IVendaRepository vendaRepository)
+        public VendaService(IVendaRepository vendaRepository, IProdutoService produtoService)
         {
             _vendaRepository = vendaRepository;
+            _produtoService = produtoService;
         }
 
         public Venda Create(CreateVenda createVenda)
         {
+
+            var produto = _produtoService.ListById(createVenda.IdProduto);
+
             var venda = new Venda
             {
                 IdCliente = createVenda.IdCliente,
                 IdProduto = createVenda.IdProduto,
                 QtdVenda = createVenda.QtdVenda,
-                VlrUnitarioVenda = createVenda.VlrUnitarioVenda,
+                VlrUnitarioVenda = produto.VlrUnitario,
                 DthVenda = DateTime.Now
             };
 
@@ -58,17 +63,30 @@ namespace DealerMVC.Services
 
         public Venda Update(UpdateVenda updateVenda)
         {
+            var produto = _produtoService.ListById(updateVenda.IdProduto);
+
             var venda = new Venda
             {
                 IdVenda = updateVenda.IdVenda,
                 IdCliente = updateVenda.IdCliente,
                 IdProduto = updateVenda.IdProduto,
                 QtdVenda = updateVenda.QtdVenda,
-                VlrUnitarioVenda = updateVenda.VlrUnitarioVenda,
+                VlrUnitarioVenda = produto.VlrUnitario,
                 DthVenda = DateTime.Now
             };
 
             return _vendaRepository.Update(venda);
         }
+
+        public List<Venda> ListByNameCliente(Cliente cliente)
+        {
+            return _vendaRepository.ListByNameCliente(cliente);
+        }
+
+        public IList<Venda> ListByDscProduto(Produto produto)
+        {
+            return _vendaRepository.ListByDscProduto(produto);
+        }
+
     }
 }

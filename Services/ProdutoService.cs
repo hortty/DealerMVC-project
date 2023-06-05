@@ -48,9 +48,11 @@ namespace DealerMVC.Services
             return _produtoRepository.ListById(produto);
         }
 
-        public IList<Produto> ListByDesc(ListByDescProduto listProduto)
+        public IList<Produto> ListByDesc(Produto produto)
         {
-            throw new NotImplementedException();
+            var produtos = _produtoRepository.ListByDesc(produto);
+
+            return produtos;
         }
 
         public Produto Update(UpdateProduto updateProduto)

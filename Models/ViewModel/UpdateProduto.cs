@@ -6,7 +6,7 @@ namespace TesteAPI.Models.ViewModel
     {
         [Key]
         [Required]
-        public int IdProduto { get; set; }
+        public int? IdProduto { get; set; }
 
         [Required]
         public string DscProduto { get; set; } = String.Empty;

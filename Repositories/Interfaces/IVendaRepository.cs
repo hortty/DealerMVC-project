@@ -12,7 +12,9 @@ namespace DealerMVC.Repositories.Interfaces
 
         public Venda Update(Venda venda);
 
-        public IList<Venda> ListByName(Venda venda);
+        public List<Venda> ListByNameCliente(Cliente cliente);
+
+        public IList<Venda> ListByDscProduto(Produto produto);
 
         public Venda ListById(Venda venda);
     }
