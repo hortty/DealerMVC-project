@@ -81,8 +81,8 @@ namespace TesteAPI.Controllers
 
             var updateCliente = new UpdateCliente
             {
-                idCliente = cliente.idCliente,
-                nmCliente = cliente.nmCliente,
+                IdCliente = cliente.IdCliente,
+                NmCliente = cliente.NmCliente,
                 Cidade = cliente.Cidade
             };
 
@@ -135,7 +135,7 @@ namespace TesteAPI.Controllers
             {
                 var pesquisarCliente = new Cliente
                 {
-                    nmCliente = clientes.NmCliente
+                    NmCliente = clientes.NmCliente
                 };
 
                 var foundClientes = _clienteService.ListByName(pesquisarCliente);

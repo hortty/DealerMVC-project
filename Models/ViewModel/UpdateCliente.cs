@@ -6,10 +6,10 @@ namespace TesteAPI.Models.ViewModel
     {
         [Key]
         [Required]
-        public int? idCliente { get; set; }
+        public int? IdCliente { get; set; }
 
         [Required]
-        public string nmCliente { get; set; } = String.Empty;
+        public string NmCliente { get; set; } = String.Empty;
 
         [Required]
         public string Cidade { get; set; } = String.Empty;

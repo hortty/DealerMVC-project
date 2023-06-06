@@ -28,12 +28,12 @@
             @foreach (var cliente in Model.Clientes)
             {
                 <tr>
-                    <td>@cliente.idCliente</td>
-                    <td>@cliente.nmCliente</td>
+                    <td>@cliente.IdCliente</td>
+                    <td>@cliente.NmCliente</td>
                     <td>@cliente.Cidade</td>
                     <td>
-                        <a href="Editar/@cliente.idCliente"><i class="fa fa-lg fa-edit"></i></a>
-                        <a href="#" class="excluir-link m-3" data-id="@cliente.idCliente"><i class="fa fa-lg fa-trash"></i></a>
+                        <a href="Editar/@cliente.IdCliente"><i class="fa fa-lg fa-edit"></i></a>
+                        <a href="#" class="excluir-link m-3" data-id="@cliente.IdCliente"><i class="fa fa-lg fa-trash"></i></a>
                     </td>
                 </tr>
             }
@@ -95,13 +95,13 @@
 @*<script>
     $(document).ready(function () {
         $('.btn-editar').click(function () {
-            var idCliente = $(this).data('id');
+            var IdCliente = $(this).data('id');
 
-            console.log("idCliente");
-            console.log(idCliente);
+            console.log("IdCliente");
+            console.log(IdCliente);
 
             $.ajax({
-                url: '/Cliente/Editar/' + idCliente,
+                url: '/Cliente/Editar/' + IdCliente,
                 type: 'GET',
                 success: function (result) {
                     console.log("sucesso")

@@ -67,7 +67,7 @@ namespace DealerMVC.Repositories
             var vendasComNomeCliente = _dbContext.Vendas
             .Include(p => p.Produto)
             .Include(c => c.Cliente)
-            .Where(c => c.Cliente.nmCliente.Contains(cliente.nmCliente))
+            .Where(c => c.Cliente.NmCliente.Contains(cliente.NmCliente))
             .ToList();
 
             return vendasComNomeCliente;

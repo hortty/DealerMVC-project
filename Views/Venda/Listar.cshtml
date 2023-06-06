@@ -42,7 +42,7 @@
                 <tr>
                     <td>@venda.IdVenda</td>
                     <td>@venda.IdCliente</td>
-                    <td>@venda.Cliente.nmCliente</td>
+                    <td>@venda.Cliente.NmCliente</td>
                     <td>@venda.IdProduto</td>
                     <td>@venda.Produto.DscProduto</td>
                     <td>@venda.QtdVenda</td>
@@ -114,13 +114,13 @@
 @*<script>
     $(document).ready(function () {
         $('.btn-editar').click(function () {
-            var idCliente = $(this).data('id');
+            var IdCliente = $(this).data('id');
 
-            console.log("idCliente");
-            console.log(idCliente);
+            console.log("IdCliente");
+            console.log(IdCliente);
 
             $.ajax({
-                url: '/Cliente/Editar/' + idCliente,
+                url: '/Cliente/Editar/' + IdCliente,
                 type: 'GET',
                 success: function (result) {
                     console.log("sucesso")

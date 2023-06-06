@@ -27,7 +27,7 @@ namespace DealerMVC.Repositories
 
         public Cliente Delete(int id)
         {
-            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.idCliente == id);
+            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.IdCliente == id);
 
             if (clienteExistente == null)
             {
@@ -50,7 +50,7 @@ namespace DealerMVC.Repositories
 
         public Cliente ListById(Cliente cliente)
         {
-            var foundCliente = _dbContext.Clientes.FirstOrDefault(cl => cl.idCliente == cliente.idCliente);
+            var foundCliente = _dbContext.Clientes.FirstOrDefault(cl => cl.IdCliente == cliente.IdCliente);
 
             if(foundCliente == null)
             {
@@ -63,7 +63,7 @@ namespace DealerMVC.Repositories
         public List<Cliente> ListByName(Cliente cliente)
         {
             var clientes = _dbContext.Clientes
-            .Where(c => c.nmCliente.Contains(cliente.nmCliente))
+            .Where(c => c.NmCliente.Contains(cliente.NmCliente))
             .ToList();
 
             return clientes;
@@ -72,7 +72,7 @@ namespace DealerMVC.Repositories
         public Cliente Update(Cliente cliente)
         {
 
-            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.idCliente == cliente.idCliente);
+            var clienteExistente = _dbContext.Clientes.FirstOrDefault(c => c.IdCliente == cliente.IdCliente);
 
             if (clienteExistente == null)
             {
@@ -84,7 +84,7 @@ namespace DealerMVC.Repositories
             }
 
             clienteExistente.Cidade = cliente.Cidade;
-            clienteExistente.nmCliente = cliente.nmCliente;
+            clienteExistente.NmCliente = cliente.NmCliente;
 
             _dbContext.Clientes.Entry(clienteExistente).State = EntityState.Modified;
             _dbContext.SaveChanges();

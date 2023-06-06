@@ -23,3 +23,70 @@
     </form>
 </div>
 
+<div class="modal fade" id="camposVazios" tabindex="-1" role="dialog" aria-labelledby="camposVaziosLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="camposVaziosLabel">Campos vazios!</h5>
+                <button type="button" class="btn btn-secondary close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Há campos vazios que precisam ser preenchidos!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary cancelar-modal" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="criadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="criadoComSucessoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="criadoComSucessoLabel">Campos vazios!</h5>
+                <button type="button" class="btn btn-secondary close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Produto criado com sucesso!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary cancelar-modal" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (e) {
+            //e.preventDefault();
+
+            var DscProduto = $('#DscProduto').val();
+            var VlrUnitario = $('#VlrUnitario').val();
+
+            if (DscProduto === '' || VlrUnitario === '') {
+                //$('#camposVazios').modal('show');
+                alert("Erro, preencha os campos corretamente");
+                //$('#criadoComSucesso').modal('hide');
+            }
+            else {
+                //$('#camposVazios').modal('hide');
+                alert("Criado com sucesso!");
+                //$('#criadoComSucesso').modal('show');
+            }
+        });
+    });
+
+    $('.cancelar-modal').click(function () {
+        $('#camposVazios').modal('hide');
+        $('#criadoComSucesso').modal('hide');
+    })
+
+
+</script>

@@ -11,13 +11,13 @@ namespace TesteAPI.Models.Domain
 
         [ForeignKey("Cliente")]
         [Required]
-        public int IdCliente { get; set; }
+        public int? IdCliente { get; set; }
 
         public Cliente Cliente { get; set; }
 
         [ForeignKey("Produto")]
         [Required]
-        public int IdProduto { get; set; }
+        public int? IdProduto { get; set; }
 
         public Produto Produto { get; set; }
 

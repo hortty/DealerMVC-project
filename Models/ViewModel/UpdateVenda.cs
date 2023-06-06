@@ -11,10 +11,10 @@ namespace TesteAPI.Models.ViewModel
         public int? IdVenda { get; set; }
 
         [Required]
-        public int IdCliente { get; set; }
+        public int? IdCliente { get; set; }
 
         [Required]
-        public int IdProduto { get; set; }
+        public int? IdProduto { get; set; }
 
         [Required]
         public int QtdVenda { get; set; }

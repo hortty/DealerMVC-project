@@ -135,7 +135,7 @@ namespace TesteAPI.Controllers
             {
                 var pesquisarCliente = new Cliente
                 {
-                    nmCliente = listVendaPesquisar.NmCliente
+                    NmCliente = listVendaPesquisar.NmCliente
                 };
 
                 var vendasEncontradas = _vendaService.ListByNameCliente(pesquisarCliente);

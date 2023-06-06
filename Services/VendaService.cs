@@ -39,6 +39,7 @@ namespace DealerMVC.Services
             {
                 throw new Exception("O ID deve ser maior que zero!");
             }
+
             return _vendaRepository.Delete(id);
         }
 
@@ -56,16 +57,12 @@ namespace DealerMVC.Services
             return _vendaRepository.ListById(venda);
         }
 
-        public IList<Cliente> ListByName(ListByNameCliente listCliente)
-        {
-            throw new NotImplementedException();
-        }
-
         public Venda Update(UpdateVenda updateVenda)
         {
-            var produto = _produtoService.ListById(updateVenda.IdProduto);
+            int idProduto = Convert.ToInt32(updateVenda.IdProduto);
+            Produto produto = _produtoService.ListById(idProduto);
 
-            var venda = new Venda
+            Venda venda = new Venda
             {
                 IdVenda = updateVenda.IdVenda,
                 IdCliente = updateVenda.IdCliente,

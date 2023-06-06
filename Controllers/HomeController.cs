@@ -48,7 +48,7 @@ namespace TesteAPI.Controllers
 
                         clientes = JsonConvert.DeserializeObject<List<Cliente>>(stringResponse);
 
-                        clientes.ForEach(cliente => cliente.idCliente = null);
+                        clientes.ForEach(cliente => cliente.IdCliente = null);
 
                         if(clientes != null)
                         {

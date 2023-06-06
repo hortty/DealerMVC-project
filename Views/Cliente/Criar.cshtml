@@ -7,13 +7,13 @@
             <h3 class="mb-4 card-header">Cadastro de Clientes</h3>
             <div class="card-body">
                 <div class="form-group">
-                    <label class="card-text" for="nmCliente">Nome do Cliente</label>
-                    <input type="text" class="form-control" id="nmCliente" name="nmCliente" asp-for="nmCliente">
-                    @Html.ValidationMessageFor(model => model.nmCliente, "", new { @class = "text-danger" })
+                    <label class="card-text" for="NmCliente">Nome do Cliente</label>
+                    <input type="text" class="form-control required" id="NmCliente" name="NmCliente" asp-for="NmCliente">
+                    @Html.ValidationMessageFor(model => model.NmCliente, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group mt-3">
                     <label class="card-text" for="Cidade">Cidade</label>
-                    <input type="text" class="form-control" id="Cidade" name="Cidade" asp-for="Cidade">
+                    <input type="text" class="form-control required" id="Cidade" name="Cidade" asp-for="Cidade">
                     @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
                 </div>
                 <button type="submit" class="btn btn-outline-light mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
@@ -22,3 +22,86 @@
     </form>
 </div>
 
+<div class="modal fade" id="camposVazios" tabindex="-1" role="dialog" aria-labelledby="camposVaziosLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="camposVaziosLabel">Campos vazios!</h5>
+                <button type="button" class="btn btn-light close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Há campos vazios que precisam ser preenchidos!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-light cancelar-modal" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="criadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="criadoComSucessoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="criadoComSucessoLabel">Campos vazios!</h5>
+                <button type="button" class="btn btn-light close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Cliente criado com sucesso!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-light cancelar-modal" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (e) {
+            //e.preventDefault();
+
+            var nmCliente = $('#NmCliente').val();
+            var cidade = $('#Cidade').val();
+
+            if (nmCliente === '' || cidade === '') {
+                //$('#camposVazios').modal('show');
+                alert("Erro no cadastro!")
+                //$('#criadoComSucesso').modal('hide');
+            }
+            else {
+                //$('#camposVazios').modal('hide');
+                //$('#criadoComSucesso').modal('show');
+                alert("Cliente criado com sucesso!")
+
+                //$.ajax({
+                //    url: '/Cliente/Criar',
+                //    method: 'POST',
+                //    data: JSON.stringify({ NmCliente: nmCliente, Cidade: cidade }),
+                //    contentType: 'application/json',
+                //    success: function (response) {
+                        
+                //        console.log('Chamada AJAX bem-sucedida');
+                //    },
+                //    error: function (xhr, status, error) {
+                        
+                //        console.error('Erro na chamada AJAX:', error);
+                //    }
+                //});
+            }
+        });
+    });
+
+    $('.cancelar-modal').click(function () {
+        $('#camposVazios').modal('hide');
+        $('#criadoComSucesso').modal('hide');
+    })
+
+
+</script>
