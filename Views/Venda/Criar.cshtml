@@ -3,61 +3,42 @@
 
 <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
     <img src="~/images/venda.png" class="img-fluid" style="max-width: 15rem; border-radius: 10px; margin-top: -10rem; margin-bottom: 3rem;" />
-    <form method="post" >
+    <form id="meuFormulario">
         <div class="card border-danger p-4" style="border-radius: 30px;">
             <h3 class="mb-4 card-header">Cadastro de Vendas</h3>
             <div class="card-body">
                 <div class="form-group">
-                    <label class="card-text" for="IdCliente">ID do Cliente</label>
-                    <input type="number" class="form-control" id="IdCliente" asp-for="IdCliente">
-                    @Html.ValidationMessageFor(model => model.IdCliente, "", new { @class = "text-danger" })
+                    <label class="card-text" for="IdCliente">ID Cliente</label>
+                    <input type="text" class="form-control required" id="IdCliente">
+                    <span class="text-danger erroIdCliente d-none">Por favor, insira um ID Cliente</span>
                 </div>
-                <div class="form-group">
-                    <label class="card-text" for="IdProduto">ID do Produto</label>
-                    <input type="number" class="form-control" id="IdProduto" asp-for="IdProduto">
-                    @Html.ValidationMessageFor(model => model.IdProduto, "", new { @class = "text-danger" })
+                <div class="form-group mt-3">
+                    <label class="card-text" for="IdProduto">ID Produto</label>
+                    <input type="number" class="form-control required" id="IdProduto">
+                    <span class="text-danger erroIdProduto d-none">Por favor, insira um ID Produto</span>
                 </div>
-                <div class="form-group">
-                    <label class="card-text" for="QtdVenda">Quantidade de vendas</label>
-                    <input type="number" class="form-control" id="QtdVenda" asp-for="QtdVenda">
-                    @Html.ValidationMessageFor(model => model.QtdVenda, "", new { @class = "text-danger" })
+                <div class="form-group mt-3">
+                    <label class="card-text" for="QtdVenda">Quantidade da venda</label>
+                    <input type="number" class="form-control required" id="QtdVenda">
+                    <span class="text-danger erroQtdVenda d-none">Por favor, insira uma quantidade</span>
                 </div>
-                <button type="submit" class="btn btn-outline-danger mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
+                <button type="button" class="button-salvar btn btn-outline-danger mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
             </div>
         </div>
     </form>
 </div>
 
-<div class="modal fade" id="camposVazios" tabindex="-1" role="dialog" aria-labelledby="camposVaziosLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="result-modal" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="camposVaziosLabel">Campos vazios!</h5>
+                <h5 class="modal-title titulo-modal">Sucesso</h5>
                 <button type="button" class="btn btn-danger close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Há campos vazios que precisam ser preenchidos!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger cancelar-modal" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="criadoComSucessoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="criadoComSucessoLabel">Campos vazios!</h5>
-                <button type="button" class="btn btn-danger close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Venda criada com sucesso!</p>
+                <p class="texto-modal">Venda criada com sucesso!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger cancelar-modal" data-dismiss="modal">Fechar</button>
@@ -68,32 +49,122 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    $(document).ready(function () {
-        $('form').submit(function (e) {
-            //e.preventDefault();
+    $('.button-salvar').click(function () {
 
-            var IdCliente = $('#IdCliente').val();
-            var IdProduto = $('#IdProduto').val();
-            var QtdVenda = $('#QtdVenda').val();
+        var createVenda = {
+            idCliente: $('#IdCliente').val(),
+            idProduto: $('#IdProduto').val(),
+            qtdVenda: $('#QtdVenda').val()
+        };
 
-            if (IdCliente === '' || IdProduto === '' || QtdVenda === '') {
-                //$('#camposVazios').modal('show');
-                //$('#criadoComSucesso').modal('hide');
-                alert("Erro, preencha os campos corretamente");
-            }
-            else {
-                //$('#camposVazios').modal('hide');
-                alert("Criado com sucesso!");
-                //$('#criadoComSucesso').modal('show');
-            }
-        });
+
+        if (createVenda.idCliente.trim() == '') {
+            $('.erroIdCliente').removeClass('d-none');
+            $('#IdCliente').addClass('is-invalid');
+        }
+        else {
+            $('.erroIdCliente').addClass('d-none');
+            $('#IdCliente').removeClass('is-invalid');
+        }
+
+        if (createVenda.idCliente <= 0) {
+            $('.erroIdCliente').removeClass('d-none');
+            $('.erroIdCliente').text('O valor precisa ser maior que zero!');
+            $('#IdCliente').addClass('is-invalid');
+        }
+        else {
+            $('.erroIdCliente').addClass('d-none');
+            $('#IdCliente').removeClass('is-invalid');
+        }
+
+
+
+        if (createVenda.idProduto.trim() == '') {
+            $('.erroIdProduto').removeClass('d-none');
+            $('#IdProduto').addClass('is-invalid');
+        }
+        else {
+            $('.erroIdProduto').addClass('d-none');
+            $('#IdProduto').removeClass('is-invalid');
+        }
+
+        if (createVenda.idProduto <= 0) {
+            $('.erroIdProduto').removeClass('d-none');
+            $('.erroIdProduto').text('O valor precisa ser maior que zero!');
+            $('#IdProduto').addClass('is-invalid');
+        }
+        else {
+            $('.erroIdProduto').text('Campo vazio');
+            $('.erroIdProduto').addClass('d-none');
+            $('#IdProduto').removeClass('is-invalid');
+        }
+
+
+
+        if (createVenda.qtdVenda.trim() == '') {
+            $('.erroQtdVenda').removeClass('d-none');
+            $('#QtdVenda').addClass('is-invalid');
+        }
+        else {
+            $('.erroQtdVenda').addClass('d-none');
+            $('#QtdVenda').removeClass('is-invalid');
+        }
+
+        if (createVenda.qtdVenda <= 0) {
+            $('.erroQtdVenda').removeClass('d-none');
+            $('.erroQtdVenda').text('O valor precisa ser maior que zero!');
+            $('#QtdVenda').addClass('is-invalid');
+        }
+        else {
+            $('.erroQtdVenda').text('Campo vazio');
+            $('.erroQtdVenda').addClass('d-none');
+            $('#QtdVenda').removeClass('is-invalid');
+        }
+
+        if (createVenda.idCliente.trim() != ''
+            && createVenda.idCliente > 0
+            && createVenda.idProduto.trim() != ''
+            && createVenda.idProduto > 0
+            && createVenda.qtdVenda.trim() != ''
+            && createVenda.qtdVenda > 0) {
+
+            $.ajax({
+                url: '/Venda/Criar',
+                method: 'POST',
+                data: {
+                    createVenda: createVenda
+                },
+                success: function (response) {
+
+                    $('#result-modal').modal('show');
+                    $('.titulo-modal').text('Sucesso');
+                    $('.texto-modal').text('Criado com sucesso!');
+
+                },
+                error: function (error) {
+
+                    $('.titulo-modal').text('Falha na operação');
+                    $('.texto-modal').text('Ocorreu um erro na operação!');
+                    console.error('Erro:', error);
+                }
+
+            });
+
+        }
+        else {
+
+            $('#result-modal').modal('show');
+            $('.titulo-modal').text('Erro');
+            $('.texto-modal').text('Há campos vazios!');
+
+        }
     });
 
     $('.cancelar-modal').click(function () {
-        $('#camposVazios').modal('hide');
-        $('#criadoComSucesso').modal('hide');
+        //$('#camposVazios').modal('hide');
+        $('#result-modal').modal('hide');
     })
-
 
 </script>

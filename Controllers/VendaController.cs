@@ -90,15 +90,15 @@ namespace TesteAPI.Controllers
             return View(updateVenda);
         }
 
-        [HttpPost]
-        public IActionResult Editar(UpdateVenda Venda)
+        [HttpPut]
+        public IActionResult Editar(UpdateVenda updateVenda)
         {
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _vendaService.Update(Venda);
+                    _vendaService.Update(updateVenda);
                 }
                 catch (Exception e)
                 {

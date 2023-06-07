@@ -3,56 +3,37 @@
 
 <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
     <img src="~/images/product.png" class="img-fluid" style="max-width: 21rem; border-radius: 30px; margin-top: -10rem; margin-bottom: 3rem;" />
-    <form method="post" >
+    <form id="meuFormulario">
         <div class="card border-primary p-4" style="border-radius: 30px;">
             <h3 class="mb-4 card-header">Cadastro de Produtos</h3>
             <div class="card-body">
                 <div class="form-group">
                     <label class="card-text" for="DscProduto">Descrição do Produto</label>
-                    <input type="text" class="form-control" id="DscProduto" asp-for="DscProduto">
-                    @Html.ValidationMessageFor(model => model.DscProduto, "", new { @class = "text-danger" })
+                    <input type="text" class="form-control required" id="DscProduto">
+                    <span class="text-danger erroDscProduto d-none">Por favor, insira uma descrição</span>
                 </div>
                 <div class="form-group mt-3">
                     <label class="card-text" for="VlrUnitario">Valor unitário</label>
-                    <input type="number" step="any" class="form-control" id="VlrUnitario" asp-for="VlrUnitario">
-                    @Html.ValidationMessageFor(model => model.VlrUnitario, "", new { @class = "text-danger" })
+                    <input type="number" class="form-control required" id="VlrUnitario">
+                    <span class="text-danger erroVlrUnitario d-none">Por favor, insira um valor</span>
                 </div>
-                <button type="submit" class="btn btn-outline-secondary mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
+                <button type="button" class="button-salvar btn btn-secondary mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
             </div>
         </div>
     </form>
 </div>
 
-<div class="modal fade" id="camposVazios" tabindex="-1" role="dialog" aria-labelledby="camposVaziosLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="result-modal" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="camposVaziosLabel">Campos vazios!</h5>
+                <h5 class="modal-title titulo-modal">Sucesso</h5>
                 <button type="button" class="btn btn-secondary close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Há campos vazios que precisam ser preenchidos!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary cancelar-modal" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="criadoComSucessoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="criadoComSucessoLabel">Campos vazios!</h5>
-                <button type="button" class="btn btn-secondary close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Produto criado com sucesso!</p>
+                <p class="texto-modal">Produto criado com sucesso!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary cancelar-modal" data-dismiss="modal">Fechar</button>
@@ -62,31 +43,85 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    $(document).ready(function () {
-        $('form').submit(function (e) {
-            //e.preventDefault();
+    $('.button-salvar').click(function () {
 
-            var DscProduto = $('#DscProduto').val();
-            var VlrUnitario = $('#VlrUnitario').val();
+        var createProduto = {
+            dscProduto: $('#DscProduto').val(),
+            vlrUnitario: $('#VlrUnitario').val()
+        };
 
-            if (DscProduto === '' || VlrUnitario === '') {
-                //$('#camposVazios').modal('show');
-                alert("Erro, preencha os campos corretamente");
-                //$('#criadoComSucesso').modal('hide');
-            }
-            else {
-                //$('#camposVazios').modal('hide');
-                alert("Criado com sucesso!");
-                //$('#criadoComSucesso').modal('show');
-            }
-        });
+        console.log(createProduto);
+
+        if (createProduto.dscProduto.trim() == '') {
+            $('.erroDscProduto').removeClass('d-none');
+            $('#DscProduto').addClass('is-invalid');
+        }
+        else {
+            $('.erroDscProduto').addClass('d-none');
+            $('#DscProduto').removeClass('is-invalid');
+        }
+
+        if (createProduto.vlrUnitario.trim() == '') {
+            $('.erroVlrUnitario').removeClass('d-none');
+            $('#VlrUnitario').addClass('is-invalid');
+        }
+        else {
+            $('.erroVlrUnitario').addClass('d-none');
+            $('#VlrUnitario').removeClass('is-invalid');
+        }
+
+        if (createProduto.vlrUnitario <= 0) {
+            $('.erroVlrUnitario').removeClass('d-none');
+            $('.erroVlrUnitario').text('O valor precisa ser maior que zero!');
+            $('#VlrUnitario').addClass('is-invalid');
+        }
+        else {
+            $('.erroVlrUnitario').text('Campo vazio');
+            $('.erroVlrUnitario').addClass('d-none');
+            $('#VlrUnitario').removeClass('is-invalid');
+        }
+
+        if (createProduto.dscProduto.trim() != '' 
+        && createProduto.vlrUnitario.trim() != ''
+        && createProduto.vlrUnitario > 0) {
+
+            $.ajax({
+                url: '/Produto/Criar',
+                method: 'POST',
+                data: {
+                    createProduto: createProduto
+                },
+                success: function (response) {
+
+                    $('#result-modal').modal('show');
+                    $('.titulo-modal').text('Sucesso');
+                    $('.texto-modal').text('Criado com sucesso!');
+
+                },
+                error: function (error) {
+
+                    $('.titulo-modal').text('Falha na operação');
+                    $('.texto-modal').text('Ocorreu um erro na operação!');
+                    console.error('Erro:', error);
+                }
+
+            });
+
+        }
+        else {
+
+            $('#result-modal').modal('show');
+            $('.titulo-modal').text('Erro');
+            $('.texto-modal').text('Há campos vazios!');
+
+        }
     });
 
     $('.cancelar-modal').click(function () {
-        $('#camposVazios').modal('hide');
-        $('#criadoComSucesso').modal('hide');
+        //$('#camposVazios').modal('hide');
+        $('#result-modal').modal('hide');
     })
-
 
 </script>

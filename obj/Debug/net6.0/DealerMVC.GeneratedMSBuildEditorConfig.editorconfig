@@ -8,89 +8,89 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DealerMVC
 build_property.RootNamespace = DealerMVC
-build_property.ProjectDir = C:\Projetos_git\DealerMVC-project\
+build_property.ProjectDir = c:\Projetos_git\DealerMVC-project\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Projetos_git\DealerMVC-project
+build_property.MSBuildProjectDirectory = c:\Projetos_git\DealerMVC-project
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Cliente/Criar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Cliente/Criar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxDcmlhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Cliente/Editar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Cliente/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Cliente/Listar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Cliente/Listar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxMaXN0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Cliente/PesquisarCliente.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Cliente/PesquisarCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxQZXNxdWlzYXJDbGllbnRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Home/Index.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Home/Privacy.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Produto/Criar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Produto/Criar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xDcmlhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Produto/Editar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Produto/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Produto/Listar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Produto/Listar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xMaXN0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Produto/PesquisarProduto.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Produto/PesquisarProduto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xQZXNxdWlzYXJQcm9kdXRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Shared/Error.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Venda/Criar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Venda/Criar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcQ3JpYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Venda/Editar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Venda/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcRWRpdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Venda/Listar.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Venda/Listar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcTGlzdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Venda/PesquisarCliente.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Venda/PesquisarCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcUGVzcXVpc2FyQ2xpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Venda/PesquisarProduto.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Venda/PesquisarProduto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcUGVzcXVpc2FyUHJvZHV0by5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/_ViewImports.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/_ViewStart.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projetos_git/DealerMVC-project/Views/Shared/_Layout.cshtml]
+[c:/Projetos_git/DealerMVC-project/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-rmdtr4pg77

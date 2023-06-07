@@ -2,56 +2,37 @@
 
 <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
     <img src="~/images/client.jpg" class="img-fluid" style="max-width: 21rem; border-radius: 30px; margin-top: -10rem; margin-bottom: 3rem;" />
-    <form method="post" id="meuFormulario">
+    <form id="meuFormulario">
         <div class="card border-light p-4" style="border-radius: 30px;">
             <h3 class="mb-4 card-header">Cadastro de Clientes</h3>
             <div class="card-body">
                 <div class="form-group">
                     <label class="card-text" for="NmCliente">Nome do Cliente</label>
-                    <input type="text" class="form-control required" id="NmCliente" name="NmCliente" asp-for="NmCliente">
-                    @Html.ValidationMessageFor(model => model.NmCliente, "", new { @class = "text-danger" })
+                    <input type="text" class="form-control required" id="NmCliente">
+                    <span class="text-danger erroNmCliente d-none">Por favor, insira um nome</span>
                 </div>
                 <div class="form-group mt-3">
                     <label class="card-text" for="Cidade">Cidade</label>
-                    <input type="text" class="form-control required" id="Cidade" name="Cidade" asp-for="Cidade">
-                    @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                    <input type="text" class="form-control required" id="Cidade">
+                    <span class="text-danger erroCidade d-none">Por favor, insira uma cidade</span>
                 </div>
-                <button type="submit" class="btn btn-outline-light mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
+                <button type="button" class="button-salvar btn btn-outline-light mt-4 d-flex justify-content-center mx-auto">Cadastrar</button>
             </div>
         </div>
     </form>
 </div>
 
-<div class="modal fade" id="camposVazios" tabindex="-1" role="dialog" aria-labelledby="camposVaziosLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="result-modal" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="camposVaziosLabel">Campos vazios!</h5>
+                <h5 class="modal-title titulo-modal">Sucesso</h5>
                 <button type="button" class="btn btn-light close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Há campos vazios que precisam ser preenchidos!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-light cancelar-modal" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="criadoComSucessoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="criadoComSucessoLabel">Campos vazios!</h5>
-                <button type="button" class="btn btn-light close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Cliente criado com sucesso!</p>
+                <p class="texto-modal">Cliente criado com sucesso!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-light cancelar-modal" data-dismiss="modal">Fechar</button>
@@ -62,46 +43,72 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    $(document).ready(function () {
-        $('form').submit(function (e) {
-            //e.preventDefault();
+        $('.button-salvar').click(function () {
 
-            var nmCliente = $('#NmCliente').val();
-            var cidade = $('#Cidade').val();
+            var createCliente = {
+                nmCliente: $('#NmCliente').val(),
+                cidade: $('#Cidade').val()
+            };
 
-            if (nmCliente === '' || cidade === '') {
-                //$('#camposVazios').modal('show');
-                alert("Erro no cadastro!")
-                //$('#criadoComSucesso').modal('hide');
+            console.log(createCliente);
+
+            if(createCliente.nmCliente.trim() == '') {
+                $('.erroNmCliente').removeClass('d-none');
+                $('#NmCliente').addClass('is-invalid');
             }
             else {
-                //$('#camposVazios').modal('hide');
-                //$('#criadoComSucesso').modal('show');
-                alert("Cliente criado com sucesso!")
+                $('.erroNmCliente').addClass('d-none');
+                $('#NmCliente').removeClass('is-invalid');
+            }
 
-                //$.ajax({
-                //    url: '/Cliente/Criar',
-                //    method: 'POST',
-                //    data: JSON.stringify({ NmCliente: nmCliente, Cidade: cidade }),
-                //    contentType: 'application/json',
-                //    success: function (response) {
-                        
-                //        console.log('Chamada AJAX bem-sucedida');
-                //    },
-                //    error: function (xhr, status, error) {
-                        
-                //        console.error('Erro na chamada AJAX:', error);
-                //    }
-                //});
+            if (createCliente.cidade.trim() == '') {
+                $('.erroCidade').removeClass('d-none');
+                $('#Cidade').addClass('is-invalid');
+            }
+            else {
+                $('.erroCidade').addClass('d-none');
+                $('#Cidade').removeClass('is-invalid');
+            }
+
+            if (createCliente.nmCliente.trim() != '' && createCliente.cidade.trim() != '') {
+
+                $.ajax({
+                    url: '/Cliente/Criar',
+                    method: 'POST',
+                    data: {
+                        createCliente: createCliente
+                    },
+                    success: function (response) {
+
+                        $('#result-modal').modal('show');
+                        $('.titulo-modal').text('Sucesso');
+                        $('.texto-modal').text('Criado com sucesso!');
+
+                    },
+                    error: function (error) {
+
+                        $('.titulo-modal').text('Falha na operação');
+                        $('.texto-modal').text('Ocorreu um erro na operação!');
+                        console.error('Erro:', error);
+                    }
+
+                });
+
+            }
+            else {
+
+                $('#result-modal').modal('show');
+                $('.titulo-modal').text('Erro');
+                $('.texto-modal').text('Há campos vazios!');
+
             }
         });
-    });
 
     $('.cancelar-modal').click(function () {
-        $('#camposVazios').modal('hide');
-        $('#criadoComSucesso').modal('hide');
+        //$('#camposVazios').modal('hide');
+        $('#result-modal').modal('hide');
     })
-
 
 </script>

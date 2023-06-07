@@ -1,55 +1,41 @@
 ﻿@model TesteAPI.Models.ViewModel.UpdateCliente
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <form method="post" action="/Cliente/Editar">
-        <div class="border p-4">
-            <h3 class="mb-4">Editar Cliente</h3>
-            <div class="form-group">
-                <label for="NmCliente">Nome do Cliente</label>
-                <input type="text" class="form-control" id="NmCliente" asp-for="NmCliente">
-                @Html.ValidationMessageFor(model => model.NmCliente, "", new { @class = "text-danger" })
+    <form id="meuFormulario">
+        <div class="card border-light p-4" style="border-radius: 30px;">
+            <h3 class="mb-4 card-header">Editar Clientes</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="card-text" for="NmCliente">Nome do Cliente</label>
+                    <input type="text" class="form-control required" id="NmCliente" asp-for="NmCliente">
+                    <span class="text-danger erroNmCliente d-none">Por favor, insira um nome</span>
+                </div>
+                <div class="form-group mt-3">
+                    <label class="card-text" for="Cidade">Cidade</label>
+                    <input type="text" class="form-control required" id="Cidade" asp-for="Cidade">
+                    <span class="text-danger erroCidade d-none">Por favor, insira uma cidade</span>
+                </div>
+                <div class="form-group mt-3 disabled">
+                    <label class="card-text" for="IdCliente">ID Cliente</label>
+                    <input disabled type="text" id="IdCliente" class="form-control" asp-for="IdCliente" />
+                </div>
+                <button type="button" class="button-salvar btn btn-outline-light mt-4 d-flex justify-content-center mx-auto">Editar</button>
             </div>
-            <div class="form-group mt-3">
-                <label for="Cidade">Cidade</label>
-                <input type="text" class="form-control" id="Cidade" asp-for="Cidade">
-                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
-            </div>
-            <input type="hidden" asp-for="IdCliente" />
-            <button type="submit" class="btn btn-outline-light mt-4 d-flex justify-content-center mx-auto">Editar</button>
         </div>
     </form>
 </div>
 
-<div class="modal fade" id="camposVazios" tabindex="-1" role="dialog" aria-labelledby="camposVaziosLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="result-modal" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="camposVaziosLabel">Campos vazios!</h5>
+                <h5 class="modal-title titulo-modal">Sucesso</h5>
                 <button type="button" class="btn btn-light close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Há campos vazios que precisam ser preenchidos!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-light cancelar-modal" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="criadoComSucessoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="criadoComSucessoLabel">Campos vazios!</h5>
-                <button type="button" class="btn btn-light close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Cliente criado com sucesso!</p>
+                <p class="texto-modal">Cliente editado com sucesso!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-light cancelar-modal" data-dismiss="modal">Fechar</button>
@@ -59,31 +45,85 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    $(document).ready(function () {
-        $('form').submit(function (e) {
-            //e.preventDefault();
+    $('.button-salvar').click(function () {
 
-            var nmCliente = $('#NmCliente').val();
-            var cidade = $('#Cidade').val();
+        var updateCliente = {
+            nmCliente: $('#NmCliente').val(),
+            cidade: $('#Cidade').val(),
+            idCliente: $('#IdCliente').val()
+        };
 
-            if (nmCliente === '' || cidade === '') {
-                //$('#camposVazios').modal('show');
-                alert("Erro, preencha os campos corretamente");
-                //$('#criadoComSucesso').modal('hide');
-            }
-            else {
-                //$('#camposVazios').modal('hide');
-                alert("Criado com sucesso!");
-                //$('#criadoComSucesso').modal('show');
-            }
-        });
+        if (updateCliente.nmCliente.trim() == '') {
+            $('.erroNmCliente').removeClass('d-none');
+            $('#NmCliente').addClass('is-invalid');
+        }
+        else {
+            $('.erroNmCliente').addClass('d-none');
+            $('#NmCliente').removeClass('is-invalid');
+        }
+
+        if (updateCliente.cidade.trim() == '') {
+            $('.erroCidade').removeClass('d-none');
+            $('#Cidade').addClass('is-invalid');
+        }
+        else {
+            $('.erroCidade').addClass('d-none');
+            $('#Cidade').removeClass('is-invalid');
+        }
+
+        if (updateCliente.idCliente.trim() == '') {
+            $('#result-modal').modal('show');
+            $('.titulo-modal').text('Erro');
+            $('.texto-modal').text('idCliente está nulo');
+        }
+        else if (updateCliente.idCliente <= 0) {
+            $('#result-modal').modal('show');
+            $('.titulo-modal').text('Erro');
+            $('.texto-modal').text('idCliente precisa ser maior que zero!');
+        }
+
+        if (updateCliente.nmCliente.trim() != ''
+            && updateCliente.cidade.trim() != ''
+            && updateCliente.idCliente.trim() != ''
+            && updateCliente.idCliente > 0) {
+
+            $.ajax({
+                url: '/Cliente/Editar',
+                method: 'PUT',
+                data: {
+                    updateCliente: updateCliente
+                },
+                success: function (response) {
+
+                    $('#result-modal').modal('show');
+                    $('.titulo-modal').text('Sucesso');
+                    $('.texto-modal').text('Criado com sucesso!');
+
+                },
+                error: function (error) {
+
+                    $('.titulo-modal').text('Falha na operação');
+                    $('.texto-modal').text('Ocorreu um erro na operação!');
+                    console.error('Erro:', error);
+                }
+
+            });
+
+        }
+        else {
+
+            $('#result-modal').modal('show');
+            $('.titulo-modal').text('Erro');
+            $('.texto-modal').text('Há campos vazios!');
+
+        }
     });
 
     $('.cancelar-modal').click(function () {
-        $('#camposVazios').modal('hide');
-        $('#criadoComSucesso').modal('hide');
+        //$('#camposVazios').modal('hide');
+        $('#result-modal').modal('hide');
     })
-
 
 </script>

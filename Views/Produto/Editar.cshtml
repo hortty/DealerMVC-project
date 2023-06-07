@@ -1,55 +1,41 @@
 ﻿@model TesteAPI.Models.ViewModel.UpdateProduto
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <form method="post" action="/Produto/Editar">
-        <div class="border p-4">
-            <h3 class="mb-4 text-secondary">Editar Produto</h3>
-            <div class="form-group">
-                <label class="text-secondary" for="DscProduto">Descrição do produto</label>
-                <input type="text" class="form-control" id="DscProduto" asp-for="DscProduto">
-                @Html.ValidationMessageFor(model => model.DscProduto, "", new { @class = "text-danger" })
+    <form id="meuFormulario">
+        <div class="card border-primary p-4" style="border-radius: 30px;">
+            <h3 class="mb-4 card-header">Editar Produtos</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="card-text" for="DscProduto">Descrição do Produto</label>
+                    <input type="text" class="form-control required" id="DscProduto" asp-for="DscProduto">
+                    <span class="text-danger erroDscProduto d-none">Por favor, insira uma descrição</span>
+                </div>
+                <div class="form-group mt-3">
+                    <label class="card-text" for="VlrUnitario">Valor unitário</label>
+                    <input type="number" class="form-control required" id="VlrUnitario" asp-for="VlrUnitario">
+                    <span class="text-danger erroVlrUnitario d-none">Por favor, insira um valor</span>
+                </div>
+                <div class="form-group mt-3 disabled">
+                    <label class="card-text" for="IdProduto">ID Produto</label>
+                    <input disabled type="text" id="IdProduto" class="form-control" asp-for="IdProduto" />
+                </div>
+                <button type="button" class="button-salvar btn btn-secondary mt-4 d-flex justify-content-center mx-auto">Editar</button>
             </div>
-            <div class="form-group mt-3">
-                <label class="text-secondary" for="VlrUnitario">Valor unitário</label>
-                <input type="number" step="any" class="form-control" id="VlrUnitario" asp-for="VlrUnitario">
-                @Html.ValidationMessageFor(model => model.VlrUnitario, "", new { @class = "text-danger" })
-            </div>
-            <input type="hidden" asp-for="IdProduto" />
-            <button type="submit" class="btn btn-secondary mt-4 d-flex justify-content-center mx-auto">Editar</button>
         </div>
     </form>
 </div>
 
-<div class="modal fade" id="camposVazios" tabindex="-1" role="dialog" aria-labelledby="camposVaziosLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="result-modal" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="camposVaziosLabel">Campos vazios!</h5>
+                <h5 class="modal-title titulo-modal">Sucesso</h5>
                 <button type="button" class="btn btn-secondary close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Há campos vazios que precisam ser preenchidos!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary cancelar-modal" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="criadoComSucessoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="criadoComSucessoLabel">Campos vazios!</h5>
-                <button type="button" class="btn btn-secondary close cancelar-modal" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Produto criado com sucesso!</p>
+                <p class="texto-modal">Produto alterado com sucesso!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary cancelar-modal" data-dismiss="modal">Fechar</button>
@@ -59,31 +45,85 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    $(document).ready(function () {
-        $('form').submit(function (e) {
-            //e.preventDefault();
+    $('.button-salvar').click(function () {
 
-            var DscProduto = $('#DscProduto').val();
-            var VlrUnitario = $('#VlrUnitario').val();
+        var updateProduto = {
+            dscProduto: $('#DscProduto').val(),
+            vlrUnitario: $('#VlrUnitario').val(),
+            idProduto: $('#IdProduto').val()
+        };
 
-            if (DscProduto === '' || VlrUnitario === '') {
-                //$('#camposVazios').modal('show');
-                alert("Erro, preencha os campos corretamente");
-                //$('#criadoComSucesso').modal('hide');
-            }
-            else {
-                //$('#camposVazios').modal('hide');
-                alert("Criado com sucesso!");
-                //$('#criadoComSucesso').modal('show');
-            }
-        });
+        if (updateProduto.dscProduto.trim() == '') {
+            $('.erroDscProduto').removeClass('d-none');
+            $('#DscProduto').addClass('is-invalid');
+        }
+        else {
+            $('.erroDscProduto').addClass('d-none');
+            $('#DscProduto').removeClass('is-invalid');
+        }
+
+        if (updateProduto.vlrUnitario.trim() == '') {
+            $('.erroVlrUnitario').removeClass('d-none');
+            $('#VlrUnitario').addClass('is-invalid');
+        }
+        else {
+            $('.erroVlrUnitario').addClass('d-none');
+            $('#VlrUnitario').removeClass('is-invalid');
+        }
+
+        if (updateProduto.vlrUnitario <= 0) {
+            $('.erroVlrUnitario').removeClass('d-none');
+            $('.erroVlrUnitario').text('O valor precisa ser maior que zero!');
+            $('#VlrUnitario').addClass('is-invalid');
+        }
+        else {
+            $('.erroVlrUnitario').text('Campo vazio');
+            $('.erroVlrUnitario').addClass('d-none');
+            $('#VlrUnitario').removeClass('is-invalid');
+        }
+
+        if (updateProduto.dscProduto.trim() != ''
+            && updateProduto.vlrUnitario.trim() != ''
+            && updateProduto.vlrUnitario > 0
+            && updateProduto.idProduto > 0) {
+
+            $.ajax({
+                url: '/Produto/Editar',
+                method: 'PUT',
+                data: {
+                    updateProduto: updateProduto
+                },
+                success: function (response) {
+
+                    $('#result-modal').modal('show');
+                    $('.titulo-modal').text('Sucesso');
+                    $('.texto-modal').text('Criado com sucesso!');
+
+                },
+                error: function (error) {
+
+                    $('.titulo-modal').text('Falha na operação');
+                    $('.texto-modal').text('Ocorreu um erro na operação!');
+                    console.error('Erro:', error);
+                }
+
+            });
+
+        }
+        else {
+
+            $('#result-modal').modal('show');
+            $('.titulo-modal').text('Erro');
+            $('.texto-modal').text('Há campos vazios!');
+
+        }
     });
 
     $('.cancelar-modal').click(function () {
-        $('#camposVazios').modal('hide');
-        $('#criadoComSucesso').modal('hide');
+        //$('#camposVazios').modal('hide');
+        $('#result-modal').modal('hide');
     })
-
 
 </script>
